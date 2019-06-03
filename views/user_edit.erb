@@ -4,13 +4,15 @@
 	<title></title>
 </head>
 <body>
-	<form>
+	<form action="/users/<%=@user.id%>/edit" method="POST">
+		<input type="hidden" name="_method" value="PUT" />
 		Username:
-		<input type="text" name="username" placeholder="Username">
+		<input type="text" name="username" placeholder="Username" />
 		Password:
-		<input type="password" name="password">
+		<input type="password" name="password" />
 		Image URL:
-		<input type="text" name="image" placeholder="Image URL">
+		<input type="text" name="image" placeholder="Image URL" />
+		<button>Update User Info</button>
 	</form>
 </body>
 </html>

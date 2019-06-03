@@ -50,7 +50,7 @@ post '/register' do
 	if !user
 		user = User.new
 		user.username = params[:username]
-		user.password = params[:password]
+		user.password_digest = params[:password]
 		user.image = params[:image]
 		user.save
 			session[:logged_in] = true
@@ -60,7 +60,7 @@ post '/register' do
 				success: true,
 				message: "#{user.username} has successfully logged in!"
 		}
-		redirect '/users/:id'
+		redirect "/users/#{session[:user_id]}"
 	else
 		session[:message] = {
 			success: false,
@@ -73,14 +73,18 @@ end
 
 get '/:id' do 
 	 @user = User.find params[:id]
-	 @trips = user.trips
+
+	 puts "user"
+	 puts @user
+
+	 trips = @user.trips
 	 erb :user_show
 end
 
 put '/:id' do 
 	user = User.find params[:id]
 	user.username = params[:username]
-	user.password = params[:password]
+	user.password_digest = params[:password]
 	user.image = params[:image_url]
 	user.save
 		session[:message] = {

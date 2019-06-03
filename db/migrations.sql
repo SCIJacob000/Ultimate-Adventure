@@ -5,7 +5,7 @@ CREATE DATABASE ultimate_adventure;
 
 CREATE TABLE users(
 id SERIAL PRIMARY KEY,
-name VARCHAR(128) NOT NULL,
+username VARCHAR(128) NOT NULL,
 password_digest VARCHAR(256) NOT NULL,
 image VARCHAR(512)
 );

@@ -9,7 +9,7 @@ class ApplicationController < Sinatra::Base
 
   ActiveRecord::Base.establish_connection(
   	:adapter => 'postgresql',
-  	:database => 'show_stopper'
+  	:database => 'ultimate_adventure'
   )
 
   use Rack::MethodOverride
