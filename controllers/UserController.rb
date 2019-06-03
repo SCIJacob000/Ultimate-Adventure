@@ -34,7 +34,7 @@ post '/login' do
 			success: true,
 			message: "#{user.username} has successfully logged in!"
 		}
-		redirect '/users/:id'
+		redirect "/users/#{session[:user_id]}"
 	else
 		session[:message] = {
 			success: false,
@@ -50,7 +50,7 @@ post '/register' do
 	if !user
 		user = User.new
 		user.username = params[:username]
-		user.password_digest = params[:password]
+		user.password = params[:password]
 		user.image = params[:image]
 		user.save
 			session[:logged_in] = true
@@ -84,7 +84,7 @@ end
 put '/:id' do 
 	user = User.find params[:id]
 	user.username = params[:username]
-	user.password_digest = params[:password]
+	user.password = params[:password]
 	user.image = params[:image_url]
 	user.save
 		session[:message] = {
