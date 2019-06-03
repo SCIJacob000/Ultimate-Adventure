@@ -2,7 +2,8 @@ class ApplicationController < Sinatra::Base
   require 'bundler'
   Bundler.require()
 
-  require './config/environments'
+  require 'dotenv'
+#  require './config/environments'
 
   enable :sessions
 
