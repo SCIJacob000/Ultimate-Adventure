@@ -21,7 +21,7 @@ class ApplicationController < Sinatra::Base
 
 #splash page route
   get '/' do    
-    redirect '/trips'
+    redirect '/users/login'
   end
 
 
