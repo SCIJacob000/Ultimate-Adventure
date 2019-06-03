@@ -1,7 +1,7 @@
 class UserController < ApplicationController
 
 get '/register' do
-	erb :register
+	erb :user_register
 end
 
 get '/logout' do 
@@ -17,6 +17,10 @@ end
 get '/:id/edit' do 
 	@user = User.find params[:username]
 	erb :user_edit
+end
+
+get '/login' do 
+	erb :user_login
 end
 
 post '/login' do
