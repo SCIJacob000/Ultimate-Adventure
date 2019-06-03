@@ -14,7 +14,7 @@ get '/logout' do
 	}
 	redirect '/users/login'
 end
-
+#working
 get '/:id/edit' do 
 	@user = User.find params[:id]
 	erb :user_edit
@@ -74,7 +74,7 @@ post '/register' do
 end
 
 
-
+#working
 put '/:id' do 
 	user = User.find params[:id]
 	user.username = params[:username]
@@ -88,14 +88,14 @@ put '/:id' do
 		redirect "users/#{user.id}"
 end
 
-#working but havent tried to display data yet
+#working displaying @user info hvent tried @user.trips
 get '/:id' do 
 	 @user = User.find params[:id]
 	 trips = @user.trips
 	 erb :user_show
 end
 
-
+#working
 delete '/:id' do 
 	user = User.find params[:id]
 	user.destroy
