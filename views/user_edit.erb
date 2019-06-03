@@ -15,5 +15,9 @@
 		<input type="text" name="image" placeholder="Image URL" />
 		<button>Update User Info</button>
 	</form>
+	<form action="/users/<%=@user.id%>" method="POST">
+		<input type="hidden" name="_method" value="DELETE">
+		<button>Delete User</button>
+	</form>
 </body>
 </html>
