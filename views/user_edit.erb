@@ -4,7 +4,8 @@
 	<title></title>
 </head>
 <body>
-	<form action="/users/<%=@user.id%>/edit" method="POST">
+	<h2>Edit Your Info!</h2>
+	<form action="/users/<%=@user.id%>" method="POST">
 		<input type="hidden" name="_method" value="PUT" />
 		Username:
 		<input type="text" name="username" placeholder="Username" />

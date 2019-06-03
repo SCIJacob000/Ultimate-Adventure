@@ -1,9 +1,10 @@
 class UserController < ApplicationController
 
+#working
 get '/register' do
 	erb :user_register
 end
-
+#working
 get '/logout' do 
 	username = session[:username]
 	session.destroy
@@ -15,14 +16,15 @@ get '/logout' do
 end
 
 get '/:id/edit' do 
-	@user = User.find params[:username]
+	@user = User.find params[:id]
 	erb :user_edit
 end
 
+#working
 get '/login' do 
 	erb :user_login
 end
-
+#working
 post '/login' do
 	user = User.find_by username: params[:username]
 	pw = params[:password]
@@ -43,7 +45,7 @@ post '/login' do
 		redirect '/users/login'
 	end
 end
-
+#working
 post '/register' do 
 	user = User.find_by username: params[:username]
 
@@ -71,15 +73,7 @@ post '/register' do
 	end
 end
 
-get '/:id' do 
-	 @user = User.find params[:id]
 
-	 puts "user"
-	 puts @user
-
-	 trips = @user.trips
-	 erb :user_show
-end
 
 put '/:id' do 
 	user = User.find params[:id]
@@ -91,20 +85,21 @@ put '/:id' do
 			success: true,
 			message: "#{user.username}'s info has successfully updated"
 		}
-		redirect 'users/:id'
+		redirect "users/#{user.id}"
 end
+
+#working but havent tried to display data yet
+get '/:id' do 
+	 @user = User.find params[:id]
+	 trips = @user.trips
+	 erb :user_show
+end
+
 
 delete '/:id' do 
 	user = User.find params[:id]
 	user.destroy
 	redirect '/users/register'
-end
-
-#possibly need this route to have a page where users can check out other users trips
-
-get '/' do 
-	@users = User.all
-	erb :user_index
 end
 
 end
