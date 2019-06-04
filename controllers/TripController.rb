@@ -20,7 +20,14 @@ delete '/:id' do
 	redirect "/users/#{session[:user_id]}"
 end
 
-post '/' do 
+get '/:id' do 
+	trip = Trip.find params[:id]
+	stops = trip.stops
+	erb :trip_show
+end 
+
+post '/' do
+puts "you are hitting the route" 
 	new_trip = Trip.new 
 	new_trip.name = params[:name]
 	new_trip.user_id = session[:user_id]
@@ -31,14 +38,5 @@ post '/' do
 	}
 	redirect "/users/#{session[:user_id]}"
 end
-
-get '/:id' do 
-	trip = Trip.find params[:id]
-	stops = trip.stops
-	erb :trip_show
-end 
-
-
-
 
 end

@@ -8,9 +8,13 @@
 		<button>Log-Out</button>
 	</form>
 	<form action="/users/<%=@user.id%>/edit" method="GET">
-		<button>Edit User Info</button>
+		<button>Edit My Info</button>
+	</form>
+	<h5>Create A New Trip Here</h5>
+	<form action="/trips" method="POST">
+		<input type="text" name="name" placeholder="Trip Name">
+		<button>Create New Trip</button>
 	</form>
 	<h1><%=@user.username%></h1>
-
 </body>
 </html>
