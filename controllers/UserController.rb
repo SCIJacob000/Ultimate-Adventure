@@ -85,13 +85,15 @@ put '/:id' do
 			success: true,
 			message: "#{user.username}'s info has successfully updated"
 		}
-		redirect "users/#{user.id}"
+	redirect "users/#{user.id}"
 end
 
 #working displaying @user info hvent tried @user.trips
 get '/:id' do 
 	 @user = User.find params[:id]
 	 trips = @user.trips
+	 @parks = []
+	 @places = []
 	 erb :user_show
 end
 

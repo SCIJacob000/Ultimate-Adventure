@@ -2,10 +2,16 @@ class ApplicationController < Sinatra::Base
   require 'bundler'
   Bundler.require()
 
+  require 'net/http'
+
   require 'dotenv'
+  Dotenv.load()
 #  require './config/environments'
 
-  enable :sessions
+  # enable :sessions
+  use Rack::Session::Cookie,  :key => 'rack.session',
+                              :path => '/',
+                              :secret => "as;dlfkja;sdlfkja;sldkfja;lskdjfa;lsdkjf"
 
   ActiveRecord::Base.establish_connection(
   	:adapter => 'postgresql',

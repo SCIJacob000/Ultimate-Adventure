@@ -16,5 +16,59 @@
 		<button>Create New Trip</button>
 	</form>
 	<h1><%=@user.username%></h1>
+	<h6>Search For National Parks By State</h6>
+	<p>Make Sure to format your search like it is shown below!</p>
+	<p>Ex.Colorado or New Mexico not colorado or New mexico</p>
+	<form action="/stops/1" method="GET">
+		<input type="text" name="state">
+		<button>SEARCH</button>
+	</form>
+	<h6>Search For Anything Else</h6>
+	<p>Ex. restaurants in atlanta OR Museums in Texas</p>
+	<form action="/stops/2" method="GET">
+		<input type="text" name="input">
+		<button>SEARCH</button>
+	</form>
+	<!-- we would like the results to change dynamically depending on what search the user performed -->
+	<% if session[:search] == 1  %>
+	<!-- this is where the results from the nps api will display -->
+		<ul>
+			<% @parks.each_with_index do |park, i| %>
+				<li>
+					<span> <%= park["fullName"] %> </span>
+					<br/>
+					Designation:
+					<span><%= park["designation"] %></span>
+					<br/>
+					Description:
+					<span><%= park["description"] %></span>
+					<br/>
+					Weather-Info:
+					<span><%= park["weatherInfo"] %></span>
+					<br/>
+				</li>
+			<%end%>
+		</ul>
+	<%else%>
+	<!-- this is where the results from google places api will display -->
+		<ul>
+			<% @places.each_with_index do |place, i| %>
+				<li>
+					Name:
+					<span> <%= place["name"] %> </span>
+					<br/>
+					Rating:
+					<span><%= place["rating"] %></span>
+					<br/>
+					Address:
+					<span><%= place["formatted_address"] %></span>
+					<br/>
+					Price Level:
+					<span><%= place["price_level"] %></span>
+					<br/>
+				</li>
+			<%end%>	
+		</ul>
+	<%end%>
 </body>
 </html>

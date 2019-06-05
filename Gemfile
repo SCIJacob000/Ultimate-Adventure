@@ -7,3 +7,5 @@ gem 'sinatra-activerecord'
 gem 'bcrypt'
 gem 'json'
 gem 'dotenv'
+gem 'httparty'
+

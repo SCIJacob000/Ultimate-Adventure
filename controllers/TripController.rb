@@ -21,8 +21,9 @@ delete '/:id' do
 end
 
 get '/:id' do 
-	trip = Trip.find params[:id]
-	stops = trip.stops
+	@trip = Trip.find params[:id]
+	stops = @trip.stops
+	session[:trip_id] = params[:id]
 	erb :trip_show
 end 
 
