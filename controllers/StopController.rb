@@ -5,7 +5,6 @@ get '/1' do
 	case params[:state]
 		when "Alabama"
 			state_code = "AL"
-			puts "al"
 		when "Arizona"
 			state_code = "AZ"
 		when "Arkansas"
@@ -101,17 +100,19 @@ get '/1' do
 		when "Wyoming"
 			state_code = "WY"
 	end
+	session[:state_code] = state_code
+	session[:search] = 1
 	uri = URI("https://developer.nps.gov/api/v1/parks?stateCode=#{state_code}&api_key=#{ENV['NPS_API_KEY']}")
 	it = Net::HTTP.get(uri) # => String
 	parsed_it = JSON.parse it
 	@parks = parsed_it["data"]
-	session[:search] = 1
 	@user = User.find session[:user_id]
 	erb :user_show
 end
 
 get '/2' do 
 	search_term = params[:input]
+	session[:search_term] = search_term
 	session[:search] = 2
 	uri = URI("https://maps.googleapis.com/maps/api/place/textsearch/json?query=#{search_term}&inputtype=textquery&&fields=formatted_address,name,rating,price_level&&key=AIzaSyC8MsmCzboLdVxigIdsbYS8wnNNxR2XNYs")
 	it = Net::HTTP.get(uri)
@@ -127,10 +128,9 @@ delete '/:id/:trip_id' do
 	trip = Trip.find_by id: params[:trip_id] #this is the trip the stop is being deleted from
 	stop = Stop.find params[:id]#this is the stop to be deleted
 	booking_to_delete = Booking.find_by(trip_id: trip.id, stop_id: stop.id) #this should work as it finds the booking associated with both the trip and the stop
-	if booking_to_delete
-		booking_to_delete = bookings 
+	if booking_to_delete 
 		booking_to_delete.destroy
-		@stop.destroy
+		stop.destroy
 		redirect "/users/#{session[:user_id]}"
 	else
 		session[:message] = {
@@ -141,41 +141,49 @@ delete '/:id/:trip_id' do
 	end	
 end
 
-post '/:stop_name' do 
-	@trip = Trip.find params[:name]
+post '/:stop_name/:index' do 
+	@trip = Trip.find_by name: params[:name]
 	stop = Stop.find_by name: params[:stop_name]
+	i = params[:index].to_i #this should represent the index number of the stop to be created in the array of results from api
+	#might have to "redo" the http requests here and pass i to the backend using params to filter the info you want as i will be the dynamic part of the equation!
 	if !stop
-		if session[:search] = 1
-		new_stop = Stop.New
-		#build the new entry based on what is returned from the http request... may have to make the same request as results lists
-		new_stop[:name] = 
-		new_stop[:address] = 
-		new_stop[:contact_info] = 
-		new_stop.save
-		new_booking = Booking.new 
-		new_booking[:trip_id] = #we will send info back in params to fill in this field
-		new_booking[:stop_id] = new_stop[:id]
-		new_booking[:user_id] = session[:user_id]
-		booking.save
-		redirect "/trips/#{@trip[:id]}"  
-	else
-		new_stop_place = Stop.new
-		#build the new entry based on what is returned from the http request... may have to make the same request as results lists
-		new_stop_place[:name] = 
-		new_stop_place[:address] = 
-		new_stop_place[:contact_info] = 
-		new_stop_place.save
-		new_booking_place = Booking.new
-		new_booking_place[:trip_id] =
-		new_booking_place[:stop_id] = new_stop_place[:id] 
-		new_booking_place[:user_id] = session[:user_id]
-		new_booking_place.save
-		redirect "/trips/#{@trip[:id]}" 
+		if session[:search] == 1
+			uri = URI("https://developer.nps.gov/api/v1/parks?stateCode=#{session[:state_code]}&api_key=#{ENV['NPS_API_KEY']}")
+			it = Net::HTTP.get(uri) # => String
+			parsed_it = JSON.parse it
+			@parks = parsed_it["data"]
+			new_stop = Stop.new
+			#build the new entry based on what is returned from the http request... may have to make the same request as results lists
+			new_stop[:name] = @parks[i]["fullName"]
+			new_stop[:lat_long] = @parks[i]["latLong"].delete "lat:" "long:"
+			puts "this should be the correctly formated lat long values as a string"
+			puts new_stop[:lat_long]
+			new_stop.save
+			new_booking = Booking.new 
+			new_booking[:trip_id] = @trip[:id]#we will send info back in params to fill in this field
+			new_booking[:stop_id] = new_stop[:id]
+			new_booking[:user_id] = session[:user_id]
+			new_booking.save
+			redirect "/trips/#{@trip[:id]}"  
+		elsif session[:search] == 2
+			uri = URI("https://maps.googleapis.com/maps/api/place/textsearch/json?query=#{session[:search_term]}&inputtype=textquery&&fields=formatted_address,name,rating,price_level&&key=AIzaSyC8MsmCzboLdVxigIdsbYS8wnNNxR2XNYs")
+			it = Net::HTTP.get(uri)
+			parsed_it = JSON.parse it 
+			@places = parsed_it["results"]
+			new_stop_place = Stop.new
+			#build the new entry based on what is returned from the http request... may have to make the same request as results lists
+			new_stop_place[:name] = @places[i]["name"]
+			new_stop_place[:address] = @places[i]["formatted_address"]
+			new_stop_place[:lat_long] = @places[i]["geometry"]["location"]["lat"].to_s + ", " + @places[i]["geometry"]["location"]["lng"].to_s
+			puts new_stop_place[:lat_long]
+			new_stop_place.save
+			new_booking_place = Booking.new
+			new_booking_place[:trip_id] = @trip[:id]
+			new_booking_place[:stop_id] = new_stop_place[:id] 
+			new_booking_place[:user_id] = session[:user_id]
+			new_booking_place.save
+			redirect "/trips/#{@trip[:id]}" 
 		end
 	end
 end
-
-
-
-
 end

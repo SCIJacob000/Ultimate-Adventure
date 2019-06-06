@@ -22,7 +22,7 @@ end
 
 get '/:id' do 
 	@trip = Trip.find params[:id]
-	stops = @trip.stops
+	@stops = @trip.stops
 	session[:trip_id] = params[:id]
 	erb :trip_show
 end 

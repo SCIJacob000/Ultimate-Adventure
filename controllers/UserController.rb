@@ -32,6 +32,7 @@ post '/login' do
 		session[:logged_in] = true
 		session[:username] = user.username
 		session[:user_id] = user.id
+		session[:search] = 0
 		session[:message] = {
 			success: true,
 			message: "#{user.username} has successfully logged in!"
@@ -58,6 +59,7 @@ post '/register' do
 			session[:logged_in] = true
 			session[:username] = user.username
 			session[:user_id] = user.id
+			session[:search] = 0
 			session[:message] = {
 				success: true,
 				message: "#{user.username} has successfully logged in!"

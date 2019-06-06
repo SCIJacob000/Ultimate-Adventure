@@ -20,7 +20,7 @@ CREATE TABLE stops(
 	id SERIAL PRIMARY KEY,
 	name VARCHAR(256),
 	address VARCHAR(512),
-	contact_info TEXT
+	lat_long VARCHAR(256)
 );
 
 CREATE TABLE bookings(

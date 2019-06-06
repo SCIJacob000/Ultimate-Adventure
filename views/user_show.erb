@@ -46,6 +46,10 @@
 					Weather-Info:
 					<span><%= park["weatherInfo"] %></span>
 					<br/>
+					<form action="/stops/<%= park["fullName"]%>/<%= i %>" method="POST">
+						<input type="text" name="name">
+						<button>Add Stop to Trip</button>
+					</form>
 				</li>
 			<%end%>
 		</ul>
@@ -66,6 +70,10 @@
 					Price Level:
 					<span><%= place["price_level"] %></span>
 					<br/>
+					<form action="/stops/<%= place["name"]%>/<%= i %>" method="POST">
+						<input type="text" name="name">
+						<button>Add Stop to Trip</button>
+					</form>
 				</li>
 			<%end%>	
 		</ul>
