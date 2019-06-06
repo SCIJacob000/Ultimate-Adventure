@@ -155,7 +155,7 @@ post '/:stop_name/:index' do
 			new_stop = Stop.new
 			#build the new entry based on what is returned from the http request... may have to make the same request as results lists
 			new_stop[:name] = @parks[i]["fullName"]
-			new_stop[:lat_long] = @parks[i]["latLong"].delete "lat:" "long:"
+			new_stop[:lat_long] = @parks[i]["latLong"].delete "lat:" " " "long:"
 			puts "this should be the correctly formated lat long values as a string"
 			puts new_stop[:lat_long]
 			new_stop.save
@@ -174,7 +174,7 @@ post '/:stop_name/:index' do
 			#build the new entry based on what is returned from the http request... may have to make the same request as results lists
 			new_stop_place[:name] = @places[i]["name"]
 			new_stop_place[:address] = @places[i]["formatted_address"]
-			new_stop_place[:lat_long] = @places[i]["geometry"]["location"]["lat"].to_s + ", " + @places[i]["geometry"]["location"]["lng"].to_s
+			new_stop_place[:lat_long] = @places[i]["geometry"]["location"]["lat"].to_s + "," + @places[i]["geometry"]["location"]["lng"].to_s
 			puts new_stop_place[:lat_long]
 			new_stop_place.save
 			new_booking_place = Booking.new
@@ -184,6 +184,13 @@ post '/:stop_name/:index' do
 			new_booking_place.save
 			redirect "/trips/#{@trip[:id]}" 
 		end
+	else
+		new_booking = Booking.new
+		new_booking[:trip_id] = @trip[:id]
+		new_booking[:stop_id] = stop[:id]
+		new_booking[:user_id] = session[:user_id]
+		new_booking.save
+		redirect "/trips/#{@trip[:id]}"
 	end
 end
 end

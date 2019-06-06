@@ -22,7 +22,16 @@ end
 
 get '/:id' do 
 	@trip = Trip.find params[:id]
+
+	puts "trip:"
+	pp @trip
+
+
 	@stops = @trip.stops
+
+	puts "stops for this trip:"
+	pp @stops
+
 	session[:trip_id] = params[:id]
 	erb :trip_show
 end 
