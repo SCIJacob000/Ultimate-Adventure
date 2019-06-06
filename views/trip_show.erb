@@ -11,10 +11,10 @@
 		<%stop_list = stop_list + stop.lat_long + "|" %>
 		<%end%>
 	<%end%>
-	<% stop_list.chop!%>
+	<%stop_list = "|" + stop_list.chop!%>
 	<% if stop_list.length > 1 %>
-	<img style="height: 600px; width: 600px;" src=“https://maps.googleapis.com/maps/api/staticmap?size=600x600&maptype=roadmap&markers=<%=stop_list%>&color:red%7Clabel:L%7C40&key=<%=ENV['PLACES_API_KEY']%>” alt=“google_map” class=“google_map”>
-		<%end%>
+	<img style="height: 600px; width: 600px;" src="https://maps.googleapis.com/maps/api/staticmap?size=600x600&maptype=roadmap&markers=color:red%7Clabel:L%7C40.<%=stop_list%>&key=<%=ENV['PLACES_API_KEY']%>" alt="google_map" class="google_map">
+	<%end%>
 	<% @stops.each do |stop| %>
 		<li>
 			<p><%=stop.name%></p>

@@ -155,7 +155,7 @@ post '/:stop_name/:index' do
 			new_stop = Stop.new
 			#build the new entry based on what is returned from the http request... may have to make the same request as results lists
 			new_stop[:name] = @parks[i]["fullName"]
-			new_stop[:lat_long] = @parks[i]["latLong"].delete "lat:" " " "long:"
+			new_stop[:lat_long] = @parks[i]["latLong"].delete "lat:" "long:"
 			puts "this should be the correctly formated lat long values as a string"
 			puts new_stop[:lat_long]
 			new_stop.save
