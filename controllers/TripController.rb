@@ -14,8 +14,8 @@ end
 
 delete '/:id' do 
 	trip = Trip.find params[:id]
-	bookings = trip.bookings
-	bookings.destroy
+	# bookings = trip.bookings
+	# bookings.destroy
 	trip.destroy
 	redirect "/users/#{session[:user_id]}"
 end
