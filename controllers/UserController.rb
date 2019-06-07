@@ -1,12 +1,14 @@
 class UserController < ApplicationController
 
 get '/register' do
+	session[:logged] = false
 	erb :user_register
 end
 
 get '/logout' do 
 	username = session[:username]
 	session.destroy
+	session[:logged] = false
 	session[:message] = {
 		success: true,
 		message: "Have Fun and Drive Safely #{username}!"
@@ -32,6 +34,7 @@ post '/login' do
 		session[:username] = user.username
 		session[:user_id] = user.id
 		session[:search] = 0
+		session[:logged] = true
 		session[:message] = {
 			success: true,
 			message: "#{user.username} has successfully logged in!"

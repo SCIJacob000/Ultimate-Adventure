@@ -99,11 +99,12 @@ get '/1' do
 			state_code = "WI"
 		when "Wyoming"
 			state_code = "WY"
-	end
-			session[:state_code] = state_code#allows you to pass the same search to the post route!
+		end
+
+			session[:state_code] = state_code
 			session[:search] = 1
 		uri = URI("https://developer.nps.gov/api/v1/parks?stateCode=#{state_code}&api_key=#{ENV['NPS_API_KEY']}")
-		it = Net::HTTP.get(uri) # => String
+		it = Net::HTTP.get(uri)
 		parsed_it = JSON.parse it
 	@parks = parsed_it["data"]
 	pp @parks
@@ -113,7 +114,7 @@ end
 
 get '/2' do 
 	search_term = params[:input]
-	session[:search_term] = search_term#allows you to pass the same search to the post route!
+	session[:search_term] = search_term
 	session[:search] = 2
 	uri = URI("https://maps.googleapis.com/maps/api/place/textsearch/json?query=#{search_term}&inputtype=textquery&&fields=formatted_address,name,rating,price_level&&key=AIzaSyC8MsmCzboLdVxigIdsbYS8wnNNxR2XNYs")
 	it = Net::HTTP.get(uri)

@@ -1,32 +1,45 @@
-
+	<h1 class="text-center width-50"><%=@user.username%></h1>
 		<form action="/users/<%=@user.id%>/edit" method="GET">
-			<button class="btn btn-primary">Edit My Info</button>
-		</form>
-	<h3>Create A New Trip Here</h3>
+			<button class="btn btn-primary float-right mt-2">Edit My Info</button>
+		</form></br></br>
+	<h3 class="text-center text-dark">Create A New Trip Here</h3>
 		<form action="/trips" method="POST">
-			<input type="text" name="name" placeholder="Trip Name">
-			<button>Create New Trip</button>
+			<div class="form-group col-lg-12 col-lg-offset-4 text-center">
+			<input class="form-control mt-2 mx-auto col-sm-5" type="text" name="name" placeholder="Trip Name">
+			<button class="btn btn-success mt-2 col-sm-3">Create New Trip</button>
+			</div>
 		</form>
-	<h1><%=@user.username%></h1>
+		<div class="row col-lg-12">
+			<div class="col-sm-6">
 		<h4>Search For National Parks By State</h4>
 			<p>Make Sure to format your search like it is shown below!</p>
 			<p>Ex.Colorado or New Mexico not colorado or New mexico</p>
 				<form action="/stops/1" method="GET">
-					<input type="text" name="state">
-					<button>SEARCH</button>
+					<div class="form-group col-md-4 col-lg-offset-4 float-left">
+						<input type="text" name="state">
+						<button class="btn btn-success">SEARCH</button>
+					</div>
 				</form>
-		<h4>Search For Anything Else</h4>
-			<p>Ex. restaurants in atlanta OR Museums in Texas</p>
+			</div>
+			<div class="col-sm-6">
+		<h4 class="text-right">Search For Anything Else</h4>
+			<p class="text-right">Ex. restaurants in atlanta OR Museums in Texas</p>
 				<form action="/stops/2" method="GET">
-					<input type="text" name="input">
-					<button>SEARCH</button>
+					<div class="form-group float-right">
+						<input type="text" name="input">
+						<button class="btn btn-success">SEARCH</button>
+					</div>
 				</form>
+			</div>
+		</div>
 	<!-- we would like the results to change "dynamically" depending on what search the user performed -->
+
 	<% if session[:search] == 1  %>
 	<!-- this is where the results from the nps api will display -->
-		<ul>
+		<ul class="text-center list-unstyled bg-info text-light p-2">
 			<% @parks.each_with_index do |park, i| %>
 				<li>
+					Name:
 					<span> <%= park["fullName"] %> </span>
 					<br/>
 					Designation:
@@ -47,7 +60,7 @@
 		</ul>
 	<%else%>
 	<!-- this is where the results from google places api will display -->
-		<ul>
+		<ul class="text-center list-unstyled bg-primary text-light p-2">
 			<% @places.each_with_index do |place, i| %>
 				<li>
 					Name:
