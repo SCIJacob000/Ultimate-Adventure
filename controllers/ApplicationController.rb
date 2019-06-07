@@ -5,18 +5,13 @@ class ApplicationController < Sinatra::Base
   require 'net/http'
 
   require 'dotenv'
-  Dotenv.load()
-#  require './config/environments'
+  require './config/environments'
 
-  # enable :sessions
+  Dotenv.load()
+
   use Rack::Session::Cookie,  :key => 'rack.session',
                               :path => '/',
-                              :secret => "as;dlfkja;sdlfkja;sldkfja;lskdjfa;lsdkjf"
-
-  ActiveRecord::Base.establish_connection(
-  	:adapter => 'postgresql',
-  	:database => 'ultimate_adventure'
-  )
+                              :secret => ENV['SESSION_SECRET']
 
   use Rack::MethodOverride
   set :method_override, true
