@@ -1,6 +1,9 @@
 class UserController < ApplicationController
 
 get '/register' do
+	session[:message]={
+		message: "Enter your Info to Register"
+	}
 	session[:logged] = false
 	erb :user_register
 end
@@ -23,6 +26,9 @@ end
 
 
 get '/login' do 
+	session[:message]={
+		message: "Enter your Info to Log-In"
+	}
 	erb :user_login
 end
 
