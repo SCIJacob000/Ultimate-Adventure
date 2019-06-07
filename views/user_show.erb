@@ -58,7 +58,7 @@
 				</li>
 			<%end%>
 		</ul>
-	<%else%>
+	<%elsif session[:search] == 2%>
 	<!-- this is where the results from google places api will display -->
 		<ul class="text-center list-unstyled bg-primary text-light p-2">
 			<% @places.each_with_index do |place, i| %>
@@ -82,4 +82,5 @@
 				</li>
 			<%end%>	
 		</ul>
+		<%else%>
 	<%end%>
