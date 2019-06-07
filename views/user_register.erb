@@ -1,18 +1,9 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<title></title>
-</head>
-<body>
-	<form action="/users/register" method="POST">
-		Username:
-		<input type="text" name="username" placeholder="Username">
-		Password:
-		<input type="password" name="password">
-		Image URL:
-		<input type="text" name="image" placeholder="Image URL">
-		<button>Register</button>
-	</form>
 
-</body>
-</html>
+	<form action="/users/register" method="POST">
+		<div class="form-group mt-5 col-lg-4 col-lg-offset-4 text-center">
+			<input class="form-control mt-2 mx-auto col-sm-8" type="text" name="username" placeholder="Username">
+			<input class="form-control mt-2 mx-auto col-sm-8" type="password" name="password">
+			<input class="form-control mt-2 mx-auto col-sm-8" type="text" name="image" placeholder="Image URL">
+			<button class="btn btn-success mt-2 mx-6">Register</button>
+		</div>
+	</form>
