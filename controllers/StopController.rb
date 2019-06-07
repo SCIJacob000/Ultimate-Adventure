@@ -157,7 +157,7 @@ post '/:stop_name/:index' do
 			#build the new entry based on what is returned from the http request... may have to make the same request as results lists^^^^^^
 					new_stop = Stop.new
 					new_stop[:name] = @parks[i]["fullName"]
-					new_stop[:address] = ""
+					new_stop[:address] = "There is no address for this location"
 					new_stop[:lat_long] = @parks[i]["latLong"].delete "lat:" "long:"
 					new_stop.save
 						new_booking = Booking.new 
