@@ -8,4 +8,4 @@ gem 'bcrypt'
 gem 'json'
 gem 'dotenv'
 gem 'httparty'
-
+gem 'bootstrap', '~> 4.3.1'

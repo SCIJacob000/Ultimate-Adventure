@@ -1,10 +1,9 @@
 class UserController < ApplicationController
 
-#working
 get '/register' do
 	erb :user_register
 end
-#working
+
 get '/logout' do 
 	username = session[:username]
 	session.destroy
@@ -14,17 +13,17 @@ get '/logout' do
 	}
 	redirect '/users/login'
 end
-#working
+
 get '/:id/edit' do 
 	@user = User.find params[:id]
 	erb :user_edit
 end
 
-#working
+
 get '/login' do 
 	erb :user_login
 end
-#working
+
 post '/login' do
 	user = User.find_by username: params[:username]
 	pw = params[:password]
@@ -46,7 +45,7 @@ post '/login' do
 		redirect '/users/login'
 	end
 end
-#working
+
 post '/register' do 
 	user = User.find_by username: params[:username]
 
@@ -76,7 +75,7 @@ post '/register' do
 end
 
 
-#working
+
 put '/:id' do 
 	user = User.find params[:id]
 	user.username = params[:username]
@@ -90,7 +89,7 @@ put '/:id' do
 	redirect "users/#{user.id}"
 end
 
-#working displaying @user info hvent tried @user.trips
+
 get '/:id' do 
 	 @user = User.find params[:id]
 	 trips = @user.trips
@@ -99,7 +98,7 @@ get '/:id' do
 	 erb :user_show
 end
 
-#working
+
 delete '/:id' do 
 	user = User.find params[:id]
 	user.destroy

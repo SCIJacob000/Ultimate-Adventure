@@ -8,9 +8,9 @@
 	<form action="/users/<%=@user.id%>" method="POST">
 		<input type="hidden" name="_method" value="PUT" />
 		Username:
-		<input type="text" name="username" placeholder="Username" />
+		<input type="text" name="username" value="<%=@user[:username]%>" />
 		Password:
-		<input type="password" name="password" />
+		<input type="password" name="password" value="<%=@user[:password]%>" />
 		Image URL:
 		<input type="text" name="image" placeholder="Image URL" />
 		<button>Update User Info</button>

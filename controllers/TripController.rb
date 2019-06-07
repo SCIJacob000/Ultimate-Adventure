@@ -7,45 +7,33 @@ end
 
 put '/:id' do 
 	@trip = Trip.find params[:id]
-	trip.name = params[:name]
-	trip.save
+		trip.name = params[:name]
+		trip.save
 	redirect "/users/#{session[:user_id]}"
 end 
 
 delete '/:id' do 
 	trip = Trip.find params[:id]
-	# bookings = trip.bookings
-	# bookings.destroy
-	trip.destroy
+		trip.destroy
 	redirect "/users/#{session[:user_id]}"
 end
 
 get '/:id' do 
 	@trip = Trip.find params[:id]
-
-	puts "trip:"
-	pp @trip
-
-
 	@stops = @trip.stops
-
-	puts "stops for this trip:"
-	pp @stops
-
-	session[:trip_id] = params[:id]
+		session[:trip_id] = params[:id]
 	erb :trip_show
 end 
 
-post '/' do
-puts "you are hitting the route" 
+post '/' do 
 	new_trip = Trip.new 
-	new_trip.name = params[:name]
-	new_trip.user_id = session[:user_id]
-	new_trip.save
-	session[:message]= {
-		success: true,
-		message: "#{new_trip.name} successfully created!"
-	}
+		new_trip.name = params[:name]
+		new_trip.user_id = session[:user_id]
+		new_trip.save
+			session[:message]= {
+				success: true,
+				message: "#{new_trip.name} successfully created!"
+			}
 	redirect "/users/#{session[:user_id]}"
 end
 
