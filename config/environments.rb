@@ -18,10 +18,10 @@ configure :production do
 
 	ActiveRecord::Base.establish_connection(
 		:adapter => db.scheme == 'postgres' ? 'postgresql' : db.scheme,
-		:host => db.host,
-		:username => db.user,
-		:password => db.password,
-		:database => db.path[1..-1],
+		:host => ENV['DATABASE_HOST'],
+		:username => ENV['DATABASE_USER'],
+		:password => ENV['DATABASE_PASSWORD'],
+		:database => ENV['DATABASE_NAME'] ,
 		:encoding => 'utf8'
 		)
 end
