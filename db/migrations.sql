@@ -5,9 +5,9 @@ CREATE DATABASE ultimate_adventure;
 
 CREATE TABLE users(
 	id SERIAL PRIMARY KEY,
-	username VARCHAR(128) NOT NULL,
+	username VARCHAR(128) NOT NULL Unique,
 	password_digest VARCHAR(256) NOT NULL,
-	image VARCHAR(512)
+	image VARCHAR(1024)
 );
 
 CREATE TABLE trips(

@@ -1,23 +1,20 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<title></title>
-</head>
-<body>
-	<h2>Edit Your Info!</h2>
+
+	<h2 class="text-center">Edit Your Info!</h2>
 	<form action="/users/<%=@user.id%>" method="POST">
-		<input type="hidden" name="_method" value="PUT" />
-		Username:
-		<input type="text" name="username" value="<%=@user[:username]%>" />
-		Password:
-		<input type="password" name="password" value="<%=@user[:password]%>" />
-		Image URL:
-		<input type="text" name="image" placeholder="Image URL" />
-		<button>Update User Info</button>
+		<div class="form-group mt-5 col-lg-12 col-lg-offset-4 text-center">
+			<input type="hidden" name="_method" value="PUT" />
+			Username:
+			<input type="text" name="username" value="<%=@user[:username]%>" />
+			Password:
+			<input type="password" name="password" value="<%=@user[:password]%>" />
+			Image URL:
+			<input type="text" name="image" placeholder="Image URL" />
+			<button>Update User Info</button>
+		</div>
 	</form>
+	<div class="text-center">
 	<form action="/users/<%=@user.id%>" method="POST">
 		<input type="hidden" name="_method" value="DELETE">
 		<button>Delete User</button>
 	</form>
-</body>
-</html>
+	</div>

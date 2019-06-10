@@ -10,21 +10,27 @@
 	<%stop_list = "|" + stop_list.chop!%>
 	<%end%>
 	<% if stop_list.length > 1 %>
-	<img class="rounded mx-auto d-block" style="height: 600px; width: 600px;" src="https://maps.googleapis.com/maps/api/staticmap?size=600x600&maptype=roadmap&markers=color:red%7Clabel:%7C40.<%=stop_list%>&key=<%=ENV['PLACES_API_KEY']%>" alt="google_map" class="google_map">
+		<img class="rounded mx-auto d-block" style="height: 600px; width: 600px;" src="https://maps.googleapis.com/maps/api/staticmap?size=600x600&maptype=roadmap&markers=color:red%7Clabel:%7C40.<%=stop_list%>&key=<%=ENV['PLACES_API_KEY']%>" alt="google_map" class="google_map">
 	<%end%>
 	<ul class="text-center list-unstyled bg-dark text-light p-2">
-	<% @stops.each do |stop| %>
-		<li>
-			<p><%=stop.name%></p>
-			<p><%=stop.address%></p>
-		</li>
-		<form action="/stops/<%=stop.id%>/<%=@trip.id%>" method="POST">
-			<input type="hidden" name="_method" value="DELETE">
-			<button>Delete Stop From Trip</button>
-		</form>
-	<%end%>
+		<% @stops.each do |stop| %>
+			<li>
+				<p><%=stop.name%></p>
+				<p><%=stop.address%></p>
+			</li>
+			<form action="/stops/<%=stop.id%>/<%=@trip.id%>" method="POST">
+				<input type="hidden" name="_method" value="DELETE">
+				<button>Delete Stop From Trip</button>
+			</form>
+		<%end%>
 	</ul>
-	<!-- need to go back and check this once a trip show page is rendering -->
+
+	<div class="text-center">
+	<form action="/users/<%=@user[:id]%>" method="GET">
+		<button class="btn btn-success">BACK TO SEARCH</button>
+	</form>
+	</div>
+
 	<div class="text-center">
 	<form action="/trips/<%=@trip.id%>" method="POST">
 		<input type="hidden" name="_method" value="DELETE">

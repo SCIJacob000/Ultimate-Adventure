@@ -1,6 +1,9 @@
 class TripController < ApplicationController
 
 get '/:id/edit' do 
+	user = User.find session[:id]
+	@user = User.find session[:id]
+	@trips_nav = user.trips
 	@trip = Trip.find params[:id]
 	erb :trip_edit
 end
@@ -15,13 +18,20 @@ end
 delete '/:id' do 
 	trip = Trip.find params[:id]
 		trip.destroy
+		session[:message]={
+			message: "Trip has been destroyed"
+		}
 	redirect "/users/#{session[:user_id]}"
 end
 
 get '/:id' do 
+	@user = User.find session[:user_id]
+	user = User.find session[:user_id]
+	@trips_nav = user.trips
 	@trip = Trip.find params[:id]
 	@stops = @trip.stops
 		session[:trip_id] = params[:id]
+		
 	erb :trip_show
 end 
 

@@ -109,6 +109,7 @@ get '/1' do
 	@parks = parsed_it["data"]
 	pp @parks
 	@user = User.find session[:user_id]
+	@trips_nav = @user.trips
 	erb :user_show
 end
 
@@ -116,11 +117,12 @@ get '/2' do
 	search_term = params[:input]
 	session[:search_term] = search_term
 	session[:search] = 2
-	uri = URI("https://maps.googleapis.com/maps/api/place/textsearch/json?query=#{search_term}&inputtype=textquery&&fields=formatted_address,name,rating,price_level&&key=AIzaSyC8MsmCzboLdVxigIdsbYS8wnNNxR2XNYs")
-	it = Net::HTTP.get(uri)
-	parsed_it = JSON.parse it 
+		uri = URI("https://maps.googleapis.com/maps/api/place/textsearch/json?query=#{search_term}&inputtype=textquery&&fields=formatted_address,name,rating,price_level&&key=AIzaSyC8MsmCzboLdVxigIdsbYS8wnNNxR2XNYs")
+		it = Net::HTTP.get(uri)
+		parsed_it = JSON.parse it 
 	@places = parsed_it["results"]
 	@user = User.find session[:user_id]
+	@trips_nav = @user.trips
 	erb :user_show
 
 end
@@ -133,6 +135,9 @@ delete '/:id/:trip_id' do
 		if booking_to_delete 
 			booking_to_delete.destroy
 			stop.destroy
+			session[:message]={
+				message: "#{stop[:name]} has been deleted from this trip!}"
+			}
 		redirect "/trips/#{trip[:id]}"
 		else
 			session[:message] = {
@@ -144,6 +149,7 @@ delete '/:id/:trip_id' do
 end
 
 post '/:stop_name/:index' do 
+	@user = User.find session[:user_id]
 	@trip = Trip.find_by name: params[:name]
 	stop = Stop.find_by name: params[:stop_name]
 	i = params[:index].to_i #this should represent the index number of the stop to be created in the array of results from api
@@ -165,7 +171,7 @@ post '/:stop_name/:index' do
 						new_booking[:stop_id] = new_stop[:id]
 						new_booking[:user_id] = session[:user_id]
 						new_booking.save
-			redirect "/trips/#{@trip[:id]}"  
+			redirect "/users/#{@user[:id]}"  
 		elsif session[:search] == 2
 			uri = URI("https://maps.googleapis.com/maps/api/place/textsearch/json?query=#{session[:search_term]}&inputtype=textquery&&fields=formatted_address,name,rating,price_level&&key=AIzaSyC8MsmCzboLdVxigIdsbYS8wnNNxR2XNYs")
 			it = Net::HTTP.get(uri)
@@ -182,7 +188,7 @@ post '/:stop_name/:index' do
 					new_booking_place[:stop_id] = new_stop_place[:id] 
 					new_booking_place[:user_id] = session[:user_id]
 					new_booking_place.save
-			redirect "/trips/#{@trip[:id]}" 
+			redirect "/users/#{@user[:id]}" 
 		end
 	else
 			new_booking = Booking.new
@@ -190,7 +196,7 @@ post '/:stop_name/:index' do
 			new_booking[:stop_id] = stop[:id]
 			new_booking[:user_id] = session[:user_id]
 			new_booking.save
-		redirect "/trips/#{@trip[:id]}"
+		redirect "/users/#{@user[:id]}"
 	end
 end
 end

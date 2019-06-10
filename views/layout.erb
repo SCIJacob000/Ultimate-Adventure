@@ -24,18 +24,20 @@
   	<% end %>
   <div class="collapse navbar-collapse" id="navbarNav">
     <ul class="navbar-nav">
-      <li class="nav-item active">
-        <a class="nav-link text-center text-light" href="/users/login">Log in<span class="sr-only">(current)</span></a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link text-center text-light" href="/users/register">Register</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link text-center text-light" href="/shows">Trip</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link text-center text-light" href="/bands">Trip</a>
-      </li>
+    	<% if session[:logged] == true %>
+    	<li class="nav-item active">
+			<a class="nav-link text-center text-light" href="/users/<%=@user[:id]%>"><%=@user[:name]%>
+				<span class="sr-only">(current)</span>
+			</a>
+		</li>
+    		 <%@trips_nav.each do |trip| %>
+			     <li class="nav-item active">
+			        <a class="nav-link text-center text-light" href="/trips/<%= trip[:id]%>"><%=trip[:name]%>
+			        	<span class="sr-only">(current)</span>
+			        </a>
+			     </li>
+	      <%end%>
+      <%end%>
     </ul>
   </div> 
     </nav>
