@@ -1,4 +1,4 @@
-configure :production, :development do 
+configure :development do 
 
 	db = URI.parse(ENV['DATABASE_URL'] || 'postgres://localhost/ultimate_adventure')
 
