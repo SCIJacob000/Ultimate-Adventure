@@ -3,7 +3,7 @@ class ApplicationController < Sinatra::Base
   Bundler.require()
 
   require 'net/http'
-  require 'sinatra/activerecord'
+  
   require 'dotenv'
   require './config/environments'
 
