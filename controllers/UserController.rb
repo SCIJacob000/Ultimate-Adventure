@@ -84,7 +84,6 @@ post '/register' do
 		user = User.new
 		user.username = params[:username]
 		user.password = params[:password]
-		user.image = params[:image]
 		user.save
 			session[:logged] = true
 			session[:username] = user.username
@@ -108,7 +107,6 @@ put '/:id' do
 	user = User.find params[:id]
 	user.username = params[:username]
 	user.password = params[:password]
-	user.image = params[:image]
 	user.save
 		session[:message] = {
 			success: true,
@@ -124,6 +122,7 @@ get '/:id' do
 	 @trips_nav = @user.trips
 	 @parks = []
 	 @places = []
+	 session[:search] = 0
 	 erb :user_show
 end
 

@@ -1,5 +1,4 @@
-
-	<h1 class="text-center text-info"><%=@trip.name%></h1>
+	<h1 class="text-center text-success"><%=@trip.name%></h1>
 	<% stop_list = "" %>
 	<% @stops.each do |stop| %>
 		<% if stop.lat_long %>
@@ -24,16 +23,16 @@
 			</form>
 		<%end%>
 	</ul>
-
 	<div class="text-center">
 	<form action="/users/<%=@user[:id]%>" method="GET">
 		<button class="btn btn-success">BACK TO SEARCH</button>
 	</form>
 	</div>
-
+	<br/>
+	<br/>
 	<div class="text-center">
 	<form action="/trips/<%=@trip.id%>" method="POST">
 		<input type="hidden" name="_method" value="DELETE">
-		<button class="btn btn-warning">Delete This Trip</button>
+		<button class="btn btn-danger">Delete This Trip</button>
 	</form>
 	</div>

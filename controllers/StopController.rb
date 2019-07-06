@@ -101,11 +101,14 @@ get '/1' do
 			state_code = "WY"
 		end
 
-			session[:state_code] = state_code
-			session[:search] = 1
+		session[:state_code] = state_code
+		session[:search] = 1
 		uri = URI("https://developer.nps.gov/api/v1/parks?stateCode=#{state_code}&api_key=#{ENV['NPS_API_KEY']}")
+		puts "\nurl for api calls"
+		puts uri 
 		it = Net::HTTP.get(uri)
 		parsed_it = JSON.parse it
+
 	@parks = parsed_it["data"]
 	pp @parks
 	@user = User.find session[:user_id]
@@ -136,7 +139,7 @@ delete '/:id/:trip_id' do
 			booking_to_delete.destroy
 			stop.destroy
 			session[:message]={
-				message: "#{stop[:name]} has been deleted from this trip!}"
+				message: "#{stop[:name]} has been deleted from this trip!"
 			}
 		redirect "/trips/#{trip[:id]}"
 		else

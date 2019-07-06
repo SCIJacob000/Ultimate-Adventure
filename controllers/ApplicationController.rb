@@ -11,13 +11,12 @@ class ApplicationController < Sinatra::Base
 
   use Rack::Session::Cookie,  :key => 'rack.session',
                               :path => '/',
-                              :secret => ENV['SESSION_SECRET']
+                              :secret => 'ownfojnoejnfew'
 
   use Rack::MethodOverride
   set :method_override, true
 
   set :views, File.expand_path('../../views', __FILE__)
-
 
   set :public_dir, File.expand_path('../../public', __FILE__)
 
