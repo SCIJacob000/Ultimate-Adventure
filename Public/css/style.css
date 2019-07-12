@@ -1,5 +1,7 @@
 #background {
 	background-image: url(https://cdn.shopify.com/s/files/1/1244/3904/products/Nease_Navarre_Beach_Sunset_x_1600_2048x.jpg?v=1462829027);
-	height: 1000px;
-	width: 1150px;
+	height: auto;
+	width: 100%;
+	background-size: cover;
+	padding-bottom: 300px
 }
