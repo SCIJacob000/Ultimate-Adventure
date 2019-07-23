@@ -3,5 +3,25 @@
 	height: auto;
 	width: 100%;
 	background-size: cover;
-	padding-bottom: 300px
+}
+
+#background1 {
+	background-color: rgba(0,0,0,.4);
+	height: auto;
+	width: 100%;
+	background-size: cover;
+	padding-bottom: 550px;
+}
+
+#border-1 {
+    border-width:5px !important;
+}
+
+#border-2 {
+    border-width:5px !important;
+}
+
+#results {
+	font-size: 40px !important;
+	font-weight: bold !important;
 }

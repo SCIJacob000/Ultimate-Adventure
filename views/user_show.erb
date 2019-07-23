@@ -1,9 +1,9 @@
 
-	<h1 class="text-center width-50"><%=@user[:username]%></h1>
+	<h1 class="text-center width-50 text-light"><%=@user[:username]%></h1>
 
 	<form action="/users/<%=@user.id%>/edit" method="GET">
 		<div class="text-center">
-			<button class="btn btn-primary my-2">Edit My Info</button>
+			<button class="btn btn-success my-2">Edit My Info</button>
 		</div>
 	</form>
 	</br>
@@ -11,10 +11,10 @@
 
 
 
-		<h3 class="text-center text-dark">Create A New Trip Here</h3>
+		<h3 class="text-center text-light">Create A New Trip Here</h3>
 		<form action="/trips" method="POST">
 			<div class="form-group col-lg-12 col-lg-offset-4 text-center">
-				<input class="form-control mt-2 mx-auto col-sm-5" type="text" name="name" placeholder="Trip Name">
+				<input class="form-control mt-2 mx-auto col-sm-5 text-center" type="text" name="name" placeholder="Trip Name">
 				<button class="btn btn-success mt-2 col-sm-3">Create New Trip</button>
 			</div>
 		</form>
@@ -23,7 +23,7 @@
 
 	<div class="mt-5">
 
-		<div class="row col-lg-12">
+		<div class="row col-lg-12 text-light">
 
 			<div class="col-sm-6">
 				<h4>Search For National Parks By State</h4>
@@ -56,9 +56,10 @@
 
 	<% if session[:search] == 1  %>
 	<!-- this is where the results from the nps api will display -->
-		<ul class="text-center list-unstyled bg-info text-light p-2">
+		<ul id="border-1" class="text-center list-unstyled bg-success text-light p-3 border border-dark">
+			<p id="results" class="text-center text-light">Search Results</p>
 			<% @parks.each_with_index do |park, i| %>
-				<li>
+				<li class="border-top border-dark pt-1 mt-2">
 					Name:
 					<span> <%= park["fullName"] %> </span>
 					<br/>
@@ -80,9 +81,10 @@
 		</ul>
 	<%elsif session[:search] == 2%>
 	<!-- this is where the results from google places api will display -->
-		<ul class="text-center list-unstyled bg-primary text-light p-2">
+		<ul id="border-2" class="text-center list-unstyled bg-success text-light border border-dark p-3">
+				<p id="results" class="text-center text-light">Search Results</p>
 			<% @places.each_with_index do |place, i| %>
-				<li>
+				<li class="border-top border-dark pt-1 mt-2">
 					Name:
 					<span> <%= place["name"] %> </span>
 					<br/>
