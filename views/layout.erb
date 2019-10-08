@@ -32,26 +32,37 @@
 
   <div class="collapse navbar-collapse" id="navbarNav">
     <ul class="navbar-nav">
-    	<% if session[:logged] == true %>
+    	 <% if session[:logged] == true %>
     	<li class="nav-item active">
-			<a class="nav-link text-center text-light" href="/users/<%=@user[:id]%>"><%=@user[:name]%>
-				<span class="sr-only">(current)</span>
-			</a>
-		</li>
-    		 <%@trips_nav.each do |trip| %>
-			     <li class="nav-item active">
-			        <a class="nav-link text-center text-light" href="/trips/<%= trip[:id]%>"><%=trip[:name]%>
-			        	<span class="sr-only">(current)</span>
-			        </a>
-			     </li>
-	      <%end%>
-      <%end%>
-    </ul>
-  </div> 
+			   <a class="nav-link text-center text-light" href="/users/<%=@user[:id]%>"><%=@user[:name]%>
+				  <span class="sr-only">(current)</span>
+			   </a>
+		  </li>
+    	<%@trips_nav.each do |trip| %>
+        <li class="nav-item active">
+          <a class="nav-link text-center text-light" href="/trips/<%= trip[:id]%>"><%=trip[:name]%>
+            <span class="sr-only">(current)</span>
+          </a>
+			  </li>
+	     <%end%>
+        <%end%>
+        </ul>
+      </div> 
     </nav>
-  </header>
-<div id="background" class="col-12-xl">
-  <div id="background1" class="col-12-xl">
+</header>
+
+  <%if session[:logged] == true %> 
+    <div id="background" class="col-12-xl">
+    <div id="background1" class="col-12-xl">
+
+  <%elsif session[:logged] == true && session[:trip_view] == true%>
+    <div id="tripbackground" class="col-12-xl">
+    <div id="background1" class="col-12-xl">
+
+  <%else%>
+      <div id="logbackground" class="col-12-xl">
+      <div id="background1" class="col-12-xl">
+  <%end%>
 
   <div class="text-center">
     <p class="text-danger d-inline bg-dark"><%=session[:message][:message]%></p>
@@ -63,7 +74,8 @@
   
   
   </div>
- <footer id="sticky-footer" class="py-4 bg-dark text-white-50">
+
+  <footer id="sticky-footer" class="py-5 bg-dark text-white-50">
     <div class="container text-center">
       <small>A JS Web Application</small>
     </div>

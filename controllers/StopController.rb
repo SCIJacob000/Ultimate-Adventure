@@ -103,6 +103,7 @@ get '/1' do
 
 		session[:state_code] = state_code
 		session[:search] = 1
+		puts params[:state]
 		uri = URI("https://developer.nps.gov/api/v1/parks?stateCode=#{state_code}&api_key=#{ENV['NPS_API_KEY']}")
 		puts "\nurl for api calls"
 		puts uri 

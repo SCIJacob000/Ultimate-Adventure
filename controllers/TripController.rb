@@ -30,7 +30,7 @@ get '/:id' do
 	@trips_nav = user.trips
 	@trip = Trip.find params[:id]
 	@stops = @trip.stops
-		session[:trip_id] = params[:id]	
+	session[:trip_view] = true	
 	erb :trip_show
 end 
 
