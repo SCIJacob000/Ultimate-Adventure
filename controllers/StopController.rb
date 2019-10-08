@@ -2,6 +2,7 @@ class StopController < ApplicationController
 #post route that makes a stop if it does not exist already as well as a booking
 #to associate that stop with the desired trip
 get '/1' do
+
 	case params[:state]
 		when "Alabama"
 			state_code = "AL"
@@ -152,7 +153,7 @@ delete '/:id/:trip_id' do
 		end	
 end
 
-post '/:stop_name/:index' do 
+post '/:stop_name/:index' do
 	@user = User.find session[:user_id]
 	@trip = Trip.find_by name: params[:name]
 	stop = Stop.find_by name: params[:stop_name]

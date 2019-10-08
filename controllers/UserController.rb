@@ -123,7 +123,7 @@ get '/:id' do
 	 @parks = []
 	 @places = []
 	 session[:search] = 0
-	 session[:tripview]= false
+	 session[:trip_view]= false
 	 erb :user_show
 end
 
