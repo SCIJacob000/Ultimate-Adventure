@@ -17,11 +17,11 @@
 	<%end%>
 
 	<ul class="container text-center list-unstyled bg-dark text-light p-2">
-		<p id="tripname" class="text-center text-success" style="font-size: 30px;"><%=@trip.name%></p>
+		<p id="tripname" class="text-center text-success font-weight-bold" style="font-size: 30px;"><%=@trip.name%></p>
 		<% @stops.each do |stop| %>
 
 			<li class="border-top border-light p-3 mt-2">
-				<p class="text-success"><%=stop.name%></p>
+				<p class="text-success font-weight-bolder"><%=stop.name%></p>
 				<p><%=stop.address%></p>
 			
 
@@ -33,7 +33,7 @@
 		<%end%>
 	</ul>
 	<div class="container text-center mt-5">
-		<div class="btn-group btn-group-justified">
+
 
 				<form class="btn btn-danger" action="/trips/<%=@trip.id%>" method="POST">
 					<input type="hidden" name="_method" value="DELETE">
@@ -46,5 +46,5 @@
 					<button class="btn btn-success">BACK TO SEARCH</button>
 				</form>
 		</div>
-	</div>	
+		
 

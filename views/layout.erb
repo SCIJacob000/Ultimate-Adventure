@@ -3,25 +3,23 @@
     <head>
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <title>Ultimate Adventure</title>
+      <title>Ultimate Adventure</title>
 
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+      <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
-        <link href="https://fonts.googleapis.com/css?family=Anton&display=swap" rel="stylesheet">
+      <link href="https://fonts.googleapis.com/css?family=Anton&display=swap" rel="stylesheet">
 
-        <link rel="stylesheet" type="text/css" href="/css/style.css">
-
+      <link rel="stylesheet" type="text/css" href="/css/style.css">
     </head>
 <body>
-
   <header>
-     <nav class="navbar navbar-expand-xl navbar-light bg-dark">
-     <button class="navbar-toggler mr-0" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+    <nav class="navbar navbar-expand-xl navbar-light bg-dark">
+      <button class="navbar-toggler mr-0" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
-   	<h2 id="logo" class="font-italic text-center text-success">
-      Ultimate Adventure
-    </h2>
+   	  <h2 id="logo" class="font-italic text-center text-success">
+        Ultimate Adventure
+      </h2>
 
   	<% if session[:logged] == true%>
         <a class="text-danger" href="/users/logout">Log out</a>
@@ -30,14 +28,14 @@
   	<% end %>
 
 
-  <div class="collapse navbar-collapse" id="navbarNav">
-    <ul class="navbar-nav">
-    	 <% if session[:logged] == true %>
-    	<li class="nav-item active">
-			   <a class="nav-link text-center text-light" href="/users/<%=@user[:id]%>"><%=@user[:name]%>
-				  <span class="sr-only">(current)</span>
-			   </a>
-		  </li>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav">
+    	   <% if session[:logged] == true %>
+    	   <li class="nav-item active">
+			       <a class="nav-link text-center text-light" href="/users/<%=@user[:id]%>"><%=@user[:name]%>
+				        <span class="sr-only">(current)</span>
+			       </a>
+		      </li>
     	<%@trips_nav.each do |trip| %>
         <li class="nav-item active">
           <a class="nav-link text-center text-light" href="/trips/<%= trip[:id]%>"><%=trip[:name]%>
@@ -51,7 +49,7 @@
     </nav>
 </header>
 
-  <%if session[:logged] == true %> 
+  <%if session[:logged] == true && session[:trip_view] == false%> 
     <div id="background" class="col-12-xl">
     <div id="background1" class="col-12-xl">
 

@@ -13,24 +13,22 @@
 
 		<h3 class="text-center text-light">Create A New Trip Here</h3>
 		<form action="/trips" method="POST">
-			<div class="form-group col-lg-12 col-lg-offset-4 text-center">
-				<input class="form-control mt-2 mx-auto col-sm-5 text-center" type="text" name="name" placeholder="Trip Name">
-				<button class="btn btn-success mt-2 col-sm-3">Create New Trip</button>
+			<div class="form-group col-lg-12 col-lg-offset-4 text-center my-6">
+				<input class="form-control mx-auto my-4 col-sm-5 text-center" type="text" name="name" placeholder="Trip Name">
+				<button class="btn btn-success mx-4 col-sm-3">Create New Trip</button>
 			</div>
 		</form>
 
 
 
-	<div class="mt-5">
+	<div class="mt-6 ">
 
 		<div class="row col-lg-12 text-light">
 
 			<div class="col-sm-6">
 				<h4>Search For National Parks By State</h4>
-				<p>Make Sure to format your search like it is shown below!</p>
-				<p>Ex.Colorado or New Mexico not colorado or New mexico</p>
 				<form action="/stops/1" method="GET">
-					<div class="form-group col-md-4 col-lg-offset-4 float-left">
+					<div class="form-group col-lg-offset-4 mt-6">
 						<select name="state">
 							<option value="Alabama">Alabama</option>
 							<option value="Arizona">Arizona</option>
@@ -90,10 +88,9 @@
 
 			<div class="col-sm-6">
 				<h4 class="text-right">Search For Anything Else</h4>
-				<p class="text-right">Ex. restaurants in atlanta OR Museums in Texas</p>
 				<form action="/stops/2" method="GET">
 					<div class="form-group float-right">
-						<input type="text" name="input">
+						<input type="text" name="input" placeholder="Ex.sports in Dallas">
 						<button class="btn btn-success">SEARCH</button>
 					</div>
 				</form>
