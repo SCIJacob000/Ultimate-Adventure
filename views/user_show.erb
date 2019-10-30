@@ -102,58 +102,62 @@
 
 	<% if session[:search] == 1  %>
 	<!-- this is where the results from the nps api will display -->
-		<ul id="border-1" class="text-center list-unstyled bg-success text-light p-3 border border-dark">
+		<ul id="border-1" class="text-center list-unstyled bg-dark text-light p-3 border border-dark">
 			<p id="results" class="text-center text-light">Search Results</p>
 			<% @parks.each_with_index do |park, i| %>
-				<li class="border-top border-dark pt-1 mt-2">
+				<li class="border-top border-light pt-1 mt-2 text-warning">
 					Name:
-					<span> <%= park["fullName"] %> </span>
+					<span class="text-danger"> <%= park["fullName"] %> </span>
 					<br/>
 					Designation:
-					<span><%= park["designation"] %></span>
+					<span class="text-light"><%= park["designation"] %></span>
 					<br/>
 					Description:
-					<span><%= park["description"] %></span>
+					<span class="text-light"><%= park["description"] %></span>
 					<br/>
 					Weather-Info:
-					<span><%= park["weatherInfo"] %></span>
+					<span class="text-light"><%= park["weatherInfo"] %></span>
 					<br/>
 					<form action="/stops/<%= park["fullName"]%>/<%= i %>" method="POST">
-						<select name="name">
-							<%for trip in @trips_nav do%>
-								<option value="<%=trip[:name]%>"><%=trip[:name]%></option>
-							<%end%>
-						</select>
-						<button>Add Stop to Trip</button>
+						<div class="form-group">
+							<select name="name">
+								<%for trip in @trips_nav do%>
+									<option value="<%=trip[:name]%>"><%=trip[:name]%></option>
+								<%end%>
+							</select>
+							<button class="btn btn-success">Add Stop to Trip</button>
+						</div>
 					</form>
 				</li>
 			<%end%>
 		</ul>
 	<%elsif session[:search] == 2%>
 	<!-- this is where the results from google places api will display -->
-		<ul id="border-2" class="text-center list-unstyled bg-success text-light border border-dark p-3">
+		<ul id="border-2" class="text-center list-unstyled bg-dark text-light border border-dark p-3">
 				<p id="results" class="text-center text-light">Search Results</p>
 			<% @places.each_with_index do |place, i| %>
-				<li class="border-top border-dark pt-1 mt-2">
+				<li class="border-top border-light pt-1 mt-2 ç">
 					Name:
-					<span> <%= place["name"] %> </span>
+					<span class="text-danger"> <%= place["name"] %> </span>
 					<br/>
 					Rating:
-					<span><%= place["rating"] %></span>
+					<span class="text-light"><%= place["rating"] %></span>
 					<br/>
 					Address:
-					<span><%= place["formatted_address"] %></span>
+					<span class="text-light"><%= place["formatted_address"] %></span>
 					<br/>
 					Price Level:
-					<span><%= place["price_level"] %></span>
+					<span class="text-light"><%= place["price_level"] %></span>
 					<br/>
 					<form action="/stops/<%= place["name"]%>/<%= i %>" method="POST">
-						<select name="name">
-							<%for trip in @trips_nav do%>
-								<option value="<%=trip[:name]%>"><%=trip[:name]%></option>
-							<%end%>
-						</select>
-						<button>Add Stop to Trip</button>
+						<div class="form-group">
+							<select name="name">
+								<%for trip in @trips_nav do%>
+									<option value="<%=trip[:name]%>"><%=trip[:name]%></option>
+								<%end%>
+							</select>
+							<button class="btn btn-success">Add Stop to Trip</button>
+						</div>
 					</form>
 				</li>
 			<%end%>	
